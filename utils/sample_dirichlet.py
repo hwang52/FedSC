@@ -39,7 +39,7 @@ def partition_balance(idxs, num_split: int):
 
 
 def build_non_iid_by_dirichlet(seed, indices2targets, non_iid_alpha, num_classes, num_indices, n_workers):
-    # indices2targets: 所有Index按照Label顺序排序 [(idx, 0), ..., (idx, 9)].
+    # indices2targets [(idx, 0), ..., (idx, 9)].
     random_state = np.random.RandomState(seed)
     n_auxi_workers = 10
     assert n_auxi_workers <= n_workers
@@ -52,8 +52,8 @@ def build_non_iid_by_dirichlet(seed, indices2targets, non_iid_alpha, num_classes
     splitted_targets = []
 
     # split
-    num_splits = math.ceil(n_workers / n_auxi_workers) # such as 20 / 10 = 2, math.ceil=返回大于等于参数x的最小整数(浮点数向上取整)
-    # 分成num_splits部分
+    num_splits = math.ceil(n_workers / n_auxi_workers) # such as 20 / 10 = 2
+    # num_splits
     split_n_workers = [
         n_auxi_workers
         if idx < num_splits - 1

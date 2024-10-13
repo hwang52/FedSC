@@ -6,7 +6,7 @@ import torch.nn.functional as F
 class InfoNCE_LCL(nn.Module):
     def __init__(self, tau=0.05):
         super().__init__()
-        self.tau = tau  # 温度系数
+        self.tau = tau 
     
     def normalize(self, *xs):
         return [None if x is None else F.normalize(x, dim=-1) for x in xs]
@@ -46,19 +46,14 @@ class InfoNCE_LCL(nn.Module):
 
 
 def nearest_client():
-    # 创建一个随机的列表，包含20个维度为[10,]的张量
     num_elements = 20
     embedding_dim = 10
     a = torch.randn(num_elements, embedding_dim)
-    # 计算两两元素之间的欧几里得距离
-    # 要获取欧几里得距离，我们可以计算L2范数的平方和（L2距离的平方）然后取平方根
-    distances = torch.cdist(a, a, p=2)  # cdist用于计算两个矩阵之间的距离，参数p=2表示L2范数
-    # 对角线是元素自身与自身的距离，设置为无穷大，避免找最小距离时找到自身
+    distances = torch.cdist(a, a, p=2) 
     distances.fill_diagonal_(float("inf"))
-    # 找到每个元素最相似的那个元素
     min_distances, min_indices = torch.min(distances, dim=1)
-    print("最相似元素的距离:", min_distances)
-    print("最相似元素的索引:", min_indices)
+    print(min_distances)
+    print(min_indices)
 
 
 if __name__=='__main__':

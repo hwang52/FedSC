@@ -24,10 +24,10 @@ def args_parser():
     parser.add_argument('--batch_size_test', type=int, default=100)
     parser.add_argument('--lr_local_training', type=float, default=0.1)
     parser.add_argument('--device', type=str, default='cuda:0')
-    parser.add_argument('--non_iid_alpha', type=float, default=0.05) # 非独立同分布程度
+    parser.add_argument('--non_iid_alpha', type=float, default=0.05) # non-iid
     parser.add_argument('--seed', type=int, default=66)
     parser.add_argument('--imb_type', default="exp", type=str, help='imbalance type')
-    parser.add_argument('--imb_factor', default=0.1, type=float, help='imbalance factor') # 长尾分布程度
+    parser.add_argument('--imb_factor', default=0.1, type=float, help='imbalance factor') # long-tail
     parser.add_argument('--dis_metric', type=str, default='ours', help='distance metric')
     parser.add_argument('--save_path', type=str, default=os.path.join(path_dir, 'result/'))
     parser.add_argument('--method', type=str, default='DSA', help='DC/DSA')
