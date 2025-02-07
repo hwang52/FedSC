@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+# !/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Python version: 3.6
 from torchvision import datasets
@@ -88,7 +88,9 @@ class Global(object):
                     re_p[key] = [value]
         for key,value in re_p.items():
             temp = torch.stack(value)
-            distances = torch.cdist(temp, temp, p=2)
+            avg_g = temp.mean(dim=0)
+            temp_g = avg_g.unsqueeze(0).expand(temp.size(0), -1)
+            distances = torch.cdist(temp, temp_g, p=2)
             distances.fill_diagonal_(float("inf"))
             _, min_indexs = torch.min(distances, dim=1)
             for id,index in enumerate(min_indexs):
@@ -297,4 +299,4 @@ if __name__ == '__main__':
     random.seed(args.seed)  # random and transforms
     torch.backends.cudnn.deterministic = True  # cudnn
     FedSC_main()
-    # Example: python main_fedsc.py --data_name cifar10 --num_classes 10 --non_iid_alpha 0.05 --imb_factor 0.1 
+    # Example: python main_fedsc.py --data_name cifar10 --num_classes 10 --non_iid_alpha 0.05 --imb_factor 0.1
