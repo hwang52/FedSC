@@ -57,7 +57,7 @@ def nearest_client():
 
 
 if __name__=='__main__':
-    # loss_func = InfoNCE_LCL(tau=0.08)
+    # loss_func = InfoNCE_LCL(tau=0.05)
     # query = torch.randn([8,10])
     # pos_key = torch.randn([8,10])
     # neg_keys = torch.randn([8,8,10])
